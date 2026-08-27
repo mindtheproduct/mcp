@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.mindtheproduct/knowledge",
+  "title": "Mind the Product",
+  "description": "Search 15 years of product management writing, conference talks and podcasts from Mind the Product — plus live events and the product job board — from any MCP client.",
+  "version": "2.0.0",
+  "websiteUrl": "https://www.mindtheproduct.com/mcp",
+  "repository": {
+    "url": "https://github.com/mindtheproduct/mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.mindtheproduct.com/api/mcp"
+    }
+  ]
+}
