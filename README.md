@@ -17,7 +17,7 @@ Read-only. Free. Sign in with a Mind the Product account when your client prompt
 **Claude Code**
 
 ```bash
-claude mcp add --transport http mtp-knowledge https://www.mindtheproduct.com/api/mcp/
+claude mcp add --transport http mind-the-product https://www.mindtheproduct.com/api/mcp/
 ```
 
 **Claude / ChatGPT** — Settings → Connectors → Add custom connector, paste the URL above.
@@ -25,13 +25,13 @@ claude mcp add --transport http mtp-knowledge https://www.mindtheproduct.com/api
 **Cursor / VS Code**
 
 ```bash
-code --add-mcp '{"name":"mtp-knowledge","type":"http","url":"https://www.mindtheproduct.com/api/mcp/"}'
+code --add-mcp '{"name":"mind-the-product","type":"http","url":"https://www.mindtheproduct.com/api/mcp/"}'
 ```
 
 **Codex** — in `~/.codex/config.toml`:
 
 ```toml
-[mcp_servers.mtp_knowledge]
+[mcp_servers.mind_the_product]
 url = "https://www.mindtheproduct.com/api/mcp/"
 ```
 
@@ -40,7 +40,7 @@ url = "https://www.mindtheproduct.com/api/mcp/"
 ```json
 {
   "mcpServers": {
-    "mtp-knowledge": {
+    "mind-the-product": {
       "url": "https://www.mindtheproduct.com/api/mcp/"
     }
   }
