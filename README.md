@@ -1,3 +1,5 @@
+![Mind the Product MCP — 3,500+ articles. One smarter agent.](assets/hero.jpg)
+
 # Mind the Product MCP
 
 Connect any MCP client to 15 years of product management writing, conference talks and
