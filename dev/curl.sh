@@ -4,7 +4,7 @@
 set -euo pipefail
 
 BASE="https://www.mindtheproduct.com"
-MCP="$BASE/api/mcp"
+MCP="$BASE/api/mcp/"   # trailing slash required — the bare path 308s
 REDIRECT="http://localhost:8765/callback"
 
 echo "1. Unauthenticated call — read the challenge"

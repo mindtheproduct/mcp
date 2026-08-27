@@ -11,7 +11,9 @@ import { createServer } from 'node:http';
 import { exec } from 'node:child_process';
 
 const BASE = 'https://www.mindtheproduct.com';
-const MCP = `${BASE}/api/mcp`;
+// Trailing slash required: the bare path 308-redirects and not every client
+// follows that on POST.
+const MCP = `${BASE}/api/mcp/`;
 const PORT = 8765;
 const REDIRECT = `http://localhost:${PORT}/callback`;
 const query = process.argv[2] ?? 'product discovery';

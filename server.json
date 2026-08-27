@@ -3,7 +3,7 @@
   "name": "com.mindtheproduct/knowledge",
   "title": "Mind the Product",
   "description": "Search 15 years of Mind the Product writing, talks and podcasts, plus live events and PM jobs.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "websiteUrl": "https://www.mindtheproduct.com/mcp",
   "repository": {
     "url": "https://github.com/mindtheproduct/mcp",
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://www.mindtheproduct.com/api/mcp"
+      "url": "https://www.mindtheproduct.com/api/mcp/"
     }
   ]
 }
