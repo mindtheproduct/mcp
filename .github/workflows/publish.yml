@@ -1,6 +1,6 @@
 # Publishes server.json to the official MCP registry when a release is cut.
 # Requires MCP_PUBLISHER_PRIVATE_KEY (Ed25519) in repo secrets, and the matching
-# public key published as a DNS TXT record on mindtheproduct.com.
+# public key served at https://www.mindtheproduct.com/.well-known/mcp-registry-auth.
 name: Publish to MCP registry
 
 on:
@@ -19,10 +19,16 @@ jobs:
           curl -sSL https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz \
             | tar -xz -C /usr/local/bin mcp-publisher
 
-      - name: Login via DNS-verified domain
-        run: mcp-publisher login dns --domain mindtheproduct.com --private-key "$PRIVATE_KEY"
+      # HTTP verification, not DNS: the public key is served from
+      # https://www.mindtheproduct.com/.well-known/mcp-registry-auth, so
+      # publishing does not depend on a DNS change.
+      - name: Login via HTTP-verified domain
+        run: mcp-publisher login http --domain mindtheproduct.com --private-key "$PRIVATE_KEY"
         env:
           PRIVATE_KEY: ${{ secrets.MCP_PUBLISHER_PRIVATE_KEY }}
+
+      - name: Validate manifest
+        run: mcp-publisher validate
 
       - name: Publish
         run: mcp-publisher publish
