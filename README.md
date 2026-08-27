@@ -96,42 +96,38 @@ results rather than scraping markdown.
 
 ---
 
-## Authentication
+## Signing in
 
-OAuth 2.1 with PKCE, and no pre-registration. Your client registers itself via dynamic
-client registration, you approve once in the browser, and it gets a token bound to your
-account.
+Your client handles it. The first time you use the MCP it'll open a browser and ask you
+to sign in with your Mind the Product account — free to create — and that's it.
 
-There is no API key and no `client_credentials` grant — every token belongs to a person
-who clicked approve.
+There's no API key to manage. Access is read-only and tied to you personally, so
+nothing you connect can post, comment, or change anything in your account.
 
-Discovery starts from a `401`:
+## Things to build with it
 
-```bash
-curl -isL -X POST https://www.mindtheproduct.com/api/mcp \
-  -H 'Content-Type: application/json' \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
-```
+Copy-paste projects. No code, no setup — connect the MCP, paste the prompt, go.
 
-The `WWW-Authenticate` header points at the protected-resource metadata, and everything
-follows from there. Full walkthrough:
+| | What it is |
+| --- | --- |
+| 🎲 [PM Trivia Night](examples/pm-trivia) | A quiz game where every answer cites a real article |
+| 🕵️ [Two Truths and a Lie](examples/two-truths-and-a-lie) | Spot the invented product claim |
+| 🧭 [Your First 90 Days](examples/first-90-days) | Choose-your-own-adventure for new product leaders |
+| 🔥 [Roadmap Roast](examples/roadmap-roast) | Paste your roadmap, get it pulled apart with receipts |
+| 🃏 [Flashcard Factory](examples/flashcard-factory) | Has your AI build you a real flashcards app |
+| 📍 [ProductTank Radar](examples/producttank-radar) | Finds the product community near you |
+
+**Made something?** Open a PR and add it — a folder, a README, the prompt you used.
+We'd like this to be where people find out what's possible.
+
+## For developers
+
+Protocol revision `2026-07-28`, Streamable HTTP transport. Full reference —
+tool schemas, the OAuth flow, resources, errors, rate limits — is at
 [mindtheproduct.com/mcp/docs](https://www.mindtheproduct.com/mcp/docs).
 
----
-
-## Examples
-
-- [`examples/curl.sh`](examples/curl.sh) — the whole flow in shell, discovery to tool call
-- [`examples/oauth-client.mjs`](examples/oauth-client.mjs) — a minimal Node client that
-  registers, opens a browser for consent, and calls a tool
-
-## Built something?
-
-Open a PR adding it here. We'd like this to be the place people find out what's possible.
-
-## Spec
-
-Protocol revision `2026-07-28`, Streamable HTTP transport. Registry manifest lives in
+Raw protocol examples live in [`dev/`](dev): a shell walkthrough of the whole flow,
+and a dependency-free Node client. The registry manifest is
 [`server.json`](server.json).
 
 ## Licence
