@@ -1,6 +1,12 @@
 # Publishes server.json to the official MCP registry when a release is cut.
 # Requires MCP_PUBLISHER_PRIVATE_KEY (Ed25519) in repo secrets, and the matching
-# public key served at https://www.mindtheproduct.com/.well-known/mcp-registry-auth.
+# public key as a DNS TXT record on the mindtheproduct.com apex.
+#
+# HTTP verification was tried and does not work here. The registry fetches
+# https://mindtheproduct.com/.well-known/mcp-registry-auth — the apex, without
+# following redirects — and this apex 308s everything to www. Verifying
+# www.mindtheproduct.com does succeed, but only grants com.mindtheproduct.www/*,
+# not the com.mindtheproduct/* namespace this server publishes under.
 name: Publish to MCP registry
 
 on:
@@ -19,11 +25,8 @@ jobs:
           curl -sSL https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz \
             | tar -xz -C /usr/local/bin mcp-publisher
 
-      # HTTP verification, not DNS: the public key is served from
-      # https://www.mindtheproduct.com/.well-known/mcp-registry-auth, so
-      # publishing does not depend on a DNS change.
-      - name: Login via HTTP-verified domain
-        run: mcp-publisher login http --domain mindtheproduct.com --private-key "$PRIVATE_KEY"
+      - name: Login via DNS-verified domain
+        run: mcp-publisher login dns --domain mindtheproduct.com --private-key "$PRIVATE_KEY"
         env:
           PRIVATE_KEY: ${{ secrets.MCP_PUBLISHER_PRIVATE_KEY }}
 
